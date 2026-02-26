@@ -1,38 +1,19 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
-/**
- * ======================================================================
- * MAIN CLASS - UseCase5PalindromeCheckerApp
- * ======================================================================
- * * Use Case 5: Stack Based Palindrome Checker
- * * Description:
- * This class validates a palindrome using a Stack
- * data structure which follows the LIFO principle.
- * * At this stage, the application:
- * - Pushes characters into a stack
- * - Pops them in reverse order
- * - Compares with original sequence
- * - Displays the result
- * * This maps stack behavior to reversal logic.
- * * @author Developer
- * @version 5.0
- */
 
 public class PalindromeCheckerApp {
-
-    /**
-     * Application entry point for UC5.
-     * * @param args Command-line arguments
-     */
-
-    public static boolean isPalindrome(String input) {
+    public static boolean compareQueueStack(String input) {
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
         for (char ch : input.toCharArray()) {
+            queue.add(ch);
             stack.push(ch);
         }
 
-        for (char ch : input.toCharArray()) {
-            if (ch != stack.pop()) {
+        while (!queue.isEmpty()) {
+            if (!queue.poll().equals(stack.pop())) {
                 return false;
             }
         }
@@ -40,7 +21,7 @@ public class PalindromeCheckerApp {
     }
 
     public static void main(String[] args) {
-        String test = "level";
-        System.out.println(isPalindrome(test));
+        String testStr = "racecar";
+        System.out.println(compareQueueStack(testStr));
     }
 }
