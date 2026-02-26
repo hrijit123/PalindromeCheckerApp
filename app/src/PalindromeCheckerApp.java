@@ -1,9 +1,9 @@
-import java.util.*;
+import java.util.Scanner;
 /**
 
-         MAIN CLASS - UseCase2PalindromeCheckerApp
+        * MAIN CLASS - UseCase2PalindromeCheckerApp
 
-    * Use Case 2: Hardcoded Palindrome Validation
+* Use Case 2: Hardcoded Palindrome Validation
 
 * Description:
         * This class demonstrates basic palindrome validation
@@ -24,24 +24,30 @@ import java.util.*;
 * @version 2.0
         */
 public class PalindromeCheckerApp {
-    /**
-     * Application entry point for UC2.
-     *
-     * @param args Command-line arguments
-     */
-    public static void main(String[] args) {
-        String S1 = "oppo";
-        int n = S1.length() - 1;
-        boolean p=false;
-        for (int i = 0; i < S1.length(); i++) {
-            if (S1.charAt(i) == S1.charAt(n - i)) {
-                p = true;
+/**
+        * Application entry point for UC2.
 
-            }}
-            if (p) {
-                System.out.println(S1+" is palindrome");
-            } else {
-                System.out.println(S1+" isnt palindrome");
+*
+
+        * @param args Command-line arguments
+*/
+    public static void main(String[] args)
+
+    {
+                Scanner sc = new Scanner(System.in);
+                String original = sc.nextLine();
+                String reversed = "";
+
+                for (int i = original.length() - 1; i >= 0; i--) {
+                    reversed = reversed + original.charAt(i);
+                }
+
+                if (original.equals(reversed)) {
+                    System.out.println("Palindrome");
+                } else {
+                    System.out.println("Not Palindrome");
+                }
+
             }
         }
-    }
+
