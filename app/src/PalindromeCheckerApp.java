@@ -1,53 +1,51 @@
-import java.util.Scanner;
 /**
+ * =============================================================
+ * MAIN CLASS - UseCase4PalindromeCheckerApp
+ * =============================================================
+ *
+ * Use Case 4: Character Array Based Validation
+ *
+ * Description:
+ * This class validates a palindrome by converting
+ * the string into a character array and comparing
+ * characters using the two-pointer technique.
+ *
+ * At this stage, the application:
+ * - Converts string to char array
+ * - Uses start and end pointers
+ * - Compares characters efficiently
+ * - Displays the result
+ *
+ * This reduces extra memory usage.
+ *
+ * @author Developer
+ * @version 4.0
+ */
 
-        * MAIN CLASS - UseCase2PalindromeCheckerApp
-
-* Use Case 2: Hardcoded Palindrome Validation
-
-* Description:
-        * This class demonstrates basic palindrome validation
-* using a hardcoded string value.
-
-*
-
-        * At this stage, the application:
-        * - Stores a predefined string
-* - Compares characters from both ends
-* - Determines whether the string is a palindrome
-* - Displays the result on the console
-*
-        * This use case introduces fundamental comparison logic
-* before using advanced data structures.
-*
-        * @author Developer
-* @version 2.0
-        */
 public class PalindromeCheckerApp {
-/**
-        * Application entry point for UC2.
 
-*
+    /**
+     * Application entry point for UC4.
+     *
+     * @param args Command-line arguments
+     */
+    public static boolean isPalindrome(String str) {
+        char[] arr = str.toCharArray();
+        int left = 0;
+        int right = arr.length - 1;
 
-        * @param args Command-line arguments
-*/
-    public static void main(String[] args)
-
-    {
-                Scanner sc = new Scanner(System.in);
-                String original = sc.nextLine();
-                String reversed = "";
-
-                for (int i = original.length() - 1; i >= 0; i--) {
-                    reversed = reversed + original.charAt(i);
-                }
-
-                if (original.equals(reversed)) {
-                    System.out.println("Palindrome");
-                } else {
-                    System.out.println("Not Palindrome");
-                }
-
+        while (left < right) {
+            if (arr[left] != arr[right]) {
+                return false;
             }
+            left++;
+            right--;
         }
+        return true;
+    }
 
+    public static void main(String[] args) {
+        String input = "madam";
+        System.out.println(isPalindrome(input));
+    }
+}
