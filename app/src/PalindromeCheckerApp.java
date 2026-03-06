@@ -1,4 +1,3 @@
-import java.util.*;
 
 /**
  * ============================================================
@@ -40,31 +39,36 @@ import java.util.*;
      */
 
 
+import java.util.*;
+
 public class PalindromeCheckerApp {
 
-            public static void main(String[] args) {
-                Scanner sc = new Scanner(System.in);
-                String input = sc.nextLine();
+    private boolean checkPalindrome(String s) {
+        s = s.replaceAll("\\s+", "").toLowerCase();
+        char[] arr = s.toCharArray();
+        int start = 0;
+        int end = arr.length - 1;
 
-                input = input.replaceAll("\\s+", "").toLowerCase();
-
-                int start = 0;
-                int end = input.length() - 1;
-                boolean palindrome = true;
-
-                while (start < end) {
-                    if (input.charAt(start) != input.charAt(end)) {
-                        palindrome = false;
-                        break;
-                    }
-                    start++;
-                    end--;
-                }
-
-                if (palindrome) {
-                    System.out.println("Palindrome");
-                } else {
-                    System.out.println("Not Palindrome");
-                }
+        while (start < end) {
+            if (arr[start] != arr[end]) {
+                return false;
             }
+            start++;
+            end--;
         }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        PalindromeCheckerApp obj = new PalindromeCheckerApp();
+
+        if (obj.checkPalindrome(input)) {
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not Palindrome");
+        }
+    }
+}
