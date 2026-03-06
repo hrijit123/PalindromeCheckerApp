@@ -42,20 +42,29 @@ import java.util.*;
 
 public class PalindromeCheckerApp {
 
-    public static boolean isPalindrome(String s, int start, int end) {
-        if (start >= end) return true;
-        if (s.charAt(start) != s.charAt(end)) return false;
-        return isPalindrome(s, start + 1, end - 1);
-    }
+            public static void main(String[] args) {
+                Scanner sc = new Scanner(System.in);
+                String input = sc.nextLine();
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+                input = input.replaceAll("\\s+", "").toLowerCase();
 
-        if (isPalindrome(input, 0, input.length() - 1)) {
-            System.out.println("Palindrome");
-        } else {
-            System.out.println("Not Palindrome");
+                int start = 0;
+                int end = input.length() - 1;
+                boolean palindrome = true;
+
+                while (start < end) {
+                    if (input.charAt(start) != input.charAt(end)) {
+                        palindrome = false;
+                        break;
+                    }
+                    start++;
+                    end--;
+                }
+
+                if (palindrome) {
+                    System.out.println("Palindrome");
+                } else {
+                    System.out.println("Not Palindrome");
+                }
+            }
         }
-    }
-}
