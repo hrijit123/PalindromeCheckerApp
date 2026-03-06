@@ -2,90 +2,57 @@ import java.util.*;
 
 /**
  * ============================================================
- * MAIN CLASS – UseCase8PalindromeCheckerApp
+ * MAIN CLASS – UseCase9RecursivePalindrome
  * ============================================================
  *
- * Use Case 8: Linked List Based Palindrome Checker
+ * Use Case 9: Recursive Palindrome Checker
  *
  * Description:
- * This class checks whether a string is a palindrome
- * using a LinkedList.
+ * This class validates a palindrome using recursion.
  *
- * Characters are added to the list and then compared
- * by removing elements from both ends:
+ * Characters are compared from the outer positions
+ * moving inward using recursive calls.
  *
- * - removeFirst()
- * - removeLast()
+ * The recursion stops when:
+ * - All characters are matched, or
+ * - A mismatch is found.
  *
- * This demonstrates how LinkedList supports
- * double-ended operations for symmetric validation.
+ * This use case demonstrates divide-and-conquer
+ * logic using method recursion.
  *
  * @author Developer
- * @version 8.0
+ * @version 9.0
  */
+
     /**
-     * Application entry point for UC8.
+     * Application entry point for UC9.
      *
      * @param args Command-line arguments
      */
 
+    /**
+     * Recursively checks whether a string is palindrome.
+     *
+     * @param s     Input string
+     * @param start Starting index
+     * @param end   Ending index
+     * @return true if palindrome, otherwise false
+     */
+
 
 public class PalindromeCheckerApp {
-    static class Node {
-        char data;
-        Node next;
-        Node(char d) {
-            data = d;
-            next = null;
-        }
+
+    public static boolean isPalindrome(String s, int start, int end) {
+        if (start >= end) return true;
+        if (s.charAt(start) != s.charAt(end)) return false;
+        return isPalindrome(s, start + 1, end - 1);
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        Node head = null, tail = null;
-
-        for (char c : input.toCharArray()) {
-            Node newNode = new Node(c);
-            if (head == null) {
-                head = tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
-        }
-
-        Node slow = head, fast = head;
-
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        Node prev = null, curr = slow, next;
-
-        while (curr != null) {
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-        }
-
-        Node first = head;
-        Node second = prev;
-        boolean palindrome = true;
-
-        while (second != null) {
-            if (first.data != second.data) {
-                palindrome = false;
-                break;
-            }
-            first = first.next;
-            second = second.next;
-        }
-
-        if (palindrome) {
+        if (isPalindrome(input, 0, input.length() - 1)) {
             System.out.println("Palindrome");
         } else {
             System.out.println("Not Palindrome");
