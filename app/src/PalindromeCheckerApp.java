@@ -43,29 +43,47 @@ import java.util.*;
 
 public class PalindromeCheckerApp {
 
-    private boolean checkPalindrome(String s) {
-        s = s.replaceAll("\\s+", "").toLowerCase();
-        char[] arr = s.toCharArray();
-        int start = 0;
-        int end = arr.length - 1;
+    interface PalindromeStrategy {
+        boolean check(String s);
+    }
 
-        while (start < end) {
-            if (arr[start] != arr[end]) {
-                return false;
+    static class StackStrategy implements PalindromeStrategy {
+        public boolean check(String s) {
+            Stack<Character> stack = new Stack<>();
+            for (char c : s.toCharArray()) stack.push(c);
+            for (char c : s.toCharArray()) {
+                if (c != stack.pop()) return false;
             }
-            start++;
-            end--;
+            return true;
         }
-        return true;
+    }
+
+    static class DequeStrategy implements PalindromeStrategy {
+        public boolean check(String s) {
+            Deque<Character> deque = new ArrayDeque<>();
+            for (char c : s.toCharArray()) deque.addLast(c);
+            while (deque.size() > 1) {
+                if (deque.removeFirst() != deque.removeLast()) return false;
+            }
+            return true;
+        }
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        PalindromeCheckerApp obj = new PalindromeCheckerApp();
+        PalindromeStrategy strategy;
 
-        if (obj.checkPalindrome(input)) {
+        int choice = sc.nextInt();
+
+        if (choice == 1) {
+            strategy = new StackStrategy();
+        } else {
+            strategy = new DequeStrategy();
+        }
+
+        if (strategy.check(input)) {
             System.out.println("Palindrome");
         } else {
             System.out.println("Not Palindrome");
